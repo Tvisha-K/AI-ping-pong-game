@@ -1,5 +1,7 @@
 wristX = "";
 
+score = "";
+
 wristY = "";
 
 /*created by prashant shukla */
