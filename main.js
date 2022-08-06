@@ -68,15 +68,11 @@ function gotResults(r) {
 
 function draw() {
 
-    if (score > 0.2) {
-      
-      fill("black");
-      stroke("black");
-      circle(wristX,wristY,3);
-
-    }
+    
 
     background(0);
+
+    image(video,0,0,700,600);
 
   fill("black");
   stroke("black");
@@ -87,7 +83,17 @@ function draw() {
   rect(0, 0, 20, 700);
 
   //funtion paddleInCanvas call 
+
+  if (score > 0.2) {
+      
+    fill("red");
+    stroke("red");
+    circle(wristX,wristY,3);
+
+  }
+
   paddleInCanvas();
+
 
   //left paddle
   fill(250, 0, 0);
