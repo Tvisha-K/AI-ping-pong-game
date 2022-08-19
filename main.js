@@ -21,6 +21,16 @@ var ball = {
     dy:3
 }
 
+function restart(){
+
+  pcscore = 0;
+
+  playerscore = 0;
+
+  loop();
+
+}
+
 rightWristY = 0;
 rightWristX = 0;
 scoreRightWrist = 0;
@@ -56,6 +66,12 @@ function gotPoses(results)
     scoreRightWrist =  results[0].pose.keypoints[10].score;
     console.log(scoreRightWrist);
   }
+}
+
+function preload(){
+  paddle = loadSound("ball_touch_paddel.wav");
+  missed = loadSound("missed.wav")
+
 }
 
 function startGame()
@@ -164,16 +180,18 @@ function move(){
    ball.x = ball.x + ball.dx;
    ball.y = ball.y + ball.dy;
    if(ball.x+ball.r>width-ball.r/2){
-       ball.dx=-ball.dx-0.5;       
+       ball.dx=-ball.dx-0.5;    
+      
    }
   if (ball.x-2.5*ball.r/2< 0){
   if (ball.y >= paddle1Y&& ball.y <= paddle1Y + paddle1Height) {
     ball.dx = -ball.dx+0.5; 
-    
+    paddle.play();
   }
+
   else{
     pcscore++;
-    
+   missed.play();
     reset();
     navigator.vibrate(100);
   }
@@ -186,7 +204,7 @@ if(pcscore ==4){
     stroke("white");
     textSize(25);
     text("Game Over!",width/2,height/2);
-    text("Reload the page!",width/2,height/2+30)
+    text("Press restart to play again",width/2,height/2+30)
     noLoop();
     pcscore = 0;
  }
